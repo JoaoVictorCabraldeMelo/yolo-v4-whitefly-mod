@@ -139,7 +139,7 @@ class Yolov4(object):
 
     def predict(self, img_path, random_color=True, plot_img=True, figsize=(10, 10), show_text=True, to_csv=False, label=None):
         raw_img = cv2.imread(img_path)[:, :, ::-1]
-        return self.predict_img(raw_img, random_color, plot_img, figsize, show_text)
+        return self.predict_img(raw_img, random_color, plot_img, figsize, show_text, to_csv=to_csv, label=label)
 
     def export_gt(self, annotation_path, gt_folder_path):
         with open(annotation_path) as file:
