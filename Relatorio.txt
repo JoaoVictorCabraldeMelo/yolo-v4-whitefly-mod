@@ -1,0 +1,30 @@
+Neste projeto foi utilizado como base o modelo de Simple Implementation Yolov4 in Keras presente no seguinte link:
+
+- https://github.com/taipingeric/yolo-v4-tf.keras
+
+Este modelo já implementado foi utilizado para adiantar o treinamento e fazer um futura a classificação no topo da CNN.
+Problemas encontrados na implementação da classificação foi o tempo que demorava o treinamento de no mínimo 5 epochs no google colab
+o que trazia a uma desconexão continua nunca completando o total ideal de epochs para ser treinado com maior precisão dos pesos e dos layers no modelo.
+
+Para features utilizadas na classificação foi utilizada a quantidade de boxes encontradas na imagens.
+Para classificação foi utilizado SVC com a implementação de um contra um. 
+
+A decisão de arquitetura foi retirar do modelo do Yolov4 e criar um SVM por fora. Uma opção apresentada e também pesquisada era criar
+um modelo de fora onde poderiamos utilizar um flatten do último output e utilizar apenas um layer de Dense no final para classificação. 
+
+Uma possível melhoria seria aplicação de um fine tuning no modelo já treinado com os pesos pegos da darknet utilizados nesse projeto. 
+Descongelando esse pesos para serem treinados também. Outra possível melhoria neste projeto seria idealmente completar o treino com no mínimo 100 epochs.
+Já que precisão das imagens está na média de .55 a .75 afetando também o número de objetos identificados na imagem que por consequência é uma featura do classificador.
+
+Isso aumentaria bastante a precision e f1 de cada classe.
+
+Os resultados de sucesso se apresentam pela a otimização de se aprender bem rápido a identificar o objeto com poucas epochs de treino e
+e velocidade de se predizer imagens com alta resolução.
+
+Referências:
+
+- https://keras.io/guides/transfer_learning/
+- https://github.com/kiyoshiiriemon/yolov4_darknet
+- https://scikit-learn.org/stable/modules/svm.html#classification
+- https://github.com/taipingeric/yolo-v4-tf.keras
+
