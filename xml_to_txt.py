@@ -2,12 +2,17 @@ import xml.etree.ElementTree as ET
 import os
 from glob import glob
 
-XML_PATH = './dataset/xml'
-CLASSES_PATH = './class_names/classes.txt'
-TXT_PATH = './dataset/txt/anno.txt'
+
+DATASET_LOW_PATH = './dataset/low_abundance/annotation'
+
+TXT_PATH = './dataset/anno.txt'
+
+CLASSES_PATH = './class_names/cassava_whitefly.txt'
 
 
 '''loads the classes'''
+
+
 def get_classes(classes_path):
     with open(classes_path) as f:
         class_names = f.readlines()
@@ -33,10 +38,15 @@ for path in glob(os.path.join(XML_PATH, '*.xml')):
     print(file_name)
     list_file.write(file_name)
     for obj in root.iter('object'):
-        cls = obj.find('name').text 
+        cls = obj.find('name').text
+        # Dealing with miss labels
+        if cls == 'whtefly':
+            cls = 'whitefly'
         cls_id = classes.index(cls)
         xmlbox = obj.find('bndbox')
-        b = (int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text), int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text))
-        list_file.write(" " + ",".join([str(a) for a in b]) + ',' + str(cls_id))
+        b = (int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text),
+             int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text))
+        list_file.write(" " + ",".join([str(a)
+                        for a in b]) + ',' + str(cls_id))
     list_file.write('\n')
 list_file.close()
