@@ -58,7 +58,7 @@ def load_weights(model, weights_file_path):
                 f'failed to read  all weights, # of unread weights: {len(file.read())}')
 
 
-def get_detection_data(img, model_outputs, class_names, label):
+def get_detection_data(img, model_outputs, class_names):
     """
 
     :param img: target raw image
