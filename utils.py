@@ -86,13 +86,15 @@ def get_detection_data(img, model_outputs, class_names):
 
 def return_output_csv(model_outputs, label):
     num_bboxes = model_outputs[-1][0]
-    
+
     open('./output_features.csv', 'a').close()
 
-    with open('./output_features.csv', 'r+', encoding='utf-8') as file:
+    with open('./output_features.csv', 'a', encoding='utf-8') as file:
         if label != None:
+            print(','.join(map(str, [num_bboxes, label])) + '\n')
             file.write(','.join(map(str, [num_bboxes, label])) + '\n')
         else:
+            print(','.join(map(str, [num_bboxes, '?'])) + '\n')
             file.write(','.join(map(str, [num_bboxes, '?'])) + '\n')
 
 
